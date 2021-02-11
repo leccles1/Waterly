@@ -8,7 +8,9 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../services/account_service.dart';
+import '../services/app_write/account_service.dart';
+import '../services/app_write/app_write_service.dart';
+import '../services/app_write/database_service.dart';
 import '../services/third_party_services_module.dart';
 
 /// adds generated dependencies
@@ -22,6 +24,8 @@ GetIt $initGetIt(
   final gh = GetItHelper(get, environment, environmentFilter);
   final thirdPartyServicesModule = _$ThirdPartyServicesModule();
   gh.lazySingleton<AccountService>(() => AccountService());
+  gh.lazySingleton<AppWriteService>(() => AppWriteService());
+  gh.lazySingleton<DatabaseService>(() => DatabaseService());
   gh.lazySingleton<DialogService>(() => thirdPartyServicesModule.dialogService);
   gh.lazySingleton<NavigationService>(
       () => thirdPartyServicesModule.navigationService);

@@ -1,6 +1,6 @@
 import 'package:Waterly/app/locator.dart';
 import 'package:Waterly/app/router.gr.dart';
-import 'package:Waterly/services/account_service.dart';
+import 'package:Waterly/services/app_write/account_service.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:dio/dio.dart';
 import 'package:stacked/stacked.dart';
@@ -13,7 +13,7 @@ class LoginViewModel extends BaseViewModel {
 
   bool _isAuthenticated = false;
   bool get isAuthenticated => _isAuthenticated;
-  Future createUser(String email, String, password, String name) async {
+  Future createUser(String email, String password, String name) async {
     print("Creating User");
     Response user = await _accountService.createUser(email, password, name);
     return user;
@@ -34,8 +34,7 @@ class LoginViewModel extends BaseViewModel {
 
       if (result is Response) {
         print(result);
-        _navigationService.navigateTo(Routes.homeView,
-            arguments: HomeViewArguments(user: result));
+        _navigationService.navigateTo(Routes.homeView);
       } else {
         _snackbarService.showSnackbar(message: result['message']);
       }

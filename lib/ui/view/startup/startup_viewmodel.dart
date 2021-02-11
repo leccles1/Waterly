@@ -1,6 +1,6 @@
 import 'package:Waterly/app/locator.dart';
 import 'package:Waterly/app/router.gr.dart';
-import 'package:Waterly/services/account_service.dart';
+import 'package:Waterly/services/app_write/account_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -10,12 +10,11 @@ class StartupViewModel extends BaseViewModel {
   // final SnackbarService _snackbarService = locator<SnackbarService>();
 
   Future handleStartupLogic() async {
-    var hasLoggedInUser = await _accountService.isAuthenticated();
-    if (hasLoggedInUser) {
-      _navigationService.navigateTo(Routes.homeView,
-          arguments: HomeViewArguments(user: _accountService.user));
+    var isLoggedIn = await _accountService.isAuthenticated();
+    if (isLoggedIn) {
+      _navigationService.clearStackAndShow(Routes.homeView);
     } else {
-      _navigationService.navigateTo(Routes.loginView);
+      _navigationService.clearStackAndShow(Routes.loginView);
     }
   }
 }

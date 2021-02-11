@@ -6,11 +6,11 @@
 
 // ignore_for_file: public_member_api_docs
 
-import 'package:appwrite/appwrite.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../ui/view/home/home_view.dart';
+import '../ui/view/home/plant_entry/plant_edit_view.dart';
 import '../ui/view/login/create_account/create_account_view.dart';
 import '../ui/view/login/login_view.dart';
 import '../ui/view/startup/startup_view.dart';
@@ -20,11 +20,13 @@ class Routes {
   static const String homeView = '/home-view';
   static const String createAccountView = '/create-account-view';
   static const String loginView = '/login-view';
+  static const String plantEditView = '/plant-edit-view';
   static const all = <String>{
     startupView,
     homeView,
     createAccountView,
     loginView,
+    plantEditView,
   };
 }
 
@@ -36,6 +38,7 @@ class Router extends RouterBase {
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.createAccountView, page: CreateAccountView),
     RouteDef(Routes.loginView, page: LoginView),
+    RouteDef(Routes.plantEditView, page: PlantEditView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -47,9 +50,8 @@ class Router extends RouterBase {
       );
     },
     HomeView: (data) {
-      final args = data.getArgs<HomeViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => HomeView(user: args.user),
+        builder: (context) => HomeView(),
         settings: data,
       );
     },
@@ -65,15 +67,11 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    PlantEditView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => PlantEditView(),
+        settings: data,
+      );
+    },
   };
-}
-
-/// ************************************************************************
-/// Arguments holder classes
-/// *************************************************************************
-
-/// HomeView arguments holder class
-class HomeViewArguments {
-  final Response<dynamic> user;
-  HomeViewArguments({@required this.user});
 }

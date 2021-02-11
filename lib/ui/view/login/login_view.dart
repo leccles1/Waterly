@@ -2,8 +2,6 @@ import 'package:Waterly/ui/view/login/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'package:Waterly/ui/view/startup/startup_viewmodel.dart';
-
 class LoginView extends StatefulWidget {
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -41,7 +39,10 @@ class _LoginViewState extends State<LoginView> {
                   padding: const EdgeInsets.only(
                       left: 48.0, right: 48.0, bottom: 30.0),
                   child: TextFormField(
-                    decoration: InputDecoration(labelText: "Email"),
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelText: "Email",
+                    ),
                     controller: _emailController,
                     validator: (value) {
                       if (value.isEmpty) {
